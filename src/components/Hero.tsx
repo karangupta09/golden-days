@@ -1,4 +1,5 @@
 import { Sun, Heart, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -17,9 +18,11 @@ const Hero = () => {
             Your comprehensive wellness platform for enriched living and meaningful connections
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-accent hover:text-primary transition-colors">
-              Get Started
-            </button>
+            <Link to="/get-started">
+              <button className="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-accent hover:text-primary transition-colors">
+                Get Started
+              </button>
+            </Link>
             <button className="border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors">
               Learn More
             </button>
