@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { PersonalizationForm } from "@/components/PersonalizationForm";
 import { useForm } from "react-hook-form";
 
 const GetStarted = () => {
@@ -47,7 +48,6 @@ const GetStarted = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Onboarding Section */}
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16 animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
@@ -106,12 +106,7 @@ const GetStarted = () => {
             <h2 className="text-2xl font-bold text-primary mb-4">Step 2: Personalize Your Experience</h2>
             <Card>
               <CardContent className="pt-6">
-                <p className="text-gray-600 mb-4">Fill in a quick questionnaire to customize your profile:</p>
-                <ul className="list-disc list-inside space-y-2 text-gray-600">
-                  <li>Your goals (e.g., staying active, volunteering, caregiving support)</li>
-                  <li>Health tracking preferences (e.g., steps, sleep, hydration)</li>
-                  <li>Interests (e.g., hobbies, local events, fitness)</li>
-                </ul>
+                <PersonalizationForm />
               </CardContent>
             </Card>
           </div>
@@ -163,7 +158,7 @@ const GetStarted = () => {
           </div>
         </div>
 
-        {/* Existing Features Section */}
+        {/* Features Section */}
         <div className="mt-32">
           <h2 className="text-3xl font-bold text-primary text-center mb-16">Our Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
