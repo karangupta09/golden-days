@@ -2,6 +2,13 @@ import { Sun, Heart, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
+  const scrollToLearnMore = () => {
+    const learnMoreSection = document.getElementById("learn-more");
+    if (learnMoreSection) {
+      learnMoreSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="relative min-h-screen bg-hero-gradient text-white overflow-hidden">
       <div className="container mx-auto px-4 py-20 relative z-10">
@@ -23,7 +30,10 @@ const Hero = () => {
                 Get Started
               </button>
             </Link>
-            <button className="border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors">
+            <button 
+              onClick={scrollToLearnMore}
+              className="border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors"
+            >
               Learn More
             </button>
           </div>

@@ -30,7 +30,7 @@ const LearnMore = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section id="learn-more" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16 text-primary">
           Learn More About GoldenDays
