@@ -1,8 +1,9 @@
-import { Heart, Activity, Footprints, Share2, Bell } from "lucide-react";
+import { Heart, Activity, Footprints, Share2, Bell, ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Link } from "react-router-dom";
 
 const HealthTracking = () => {
   const { toast } = useToast();
@@ -39,8 +40,16 @@ const HealthTracking = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       <main className="container mx-auto px-4 pt-20 pb-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-primary">Health Tracking</h1>
+        <div className="flex items-center gap-4 mb-8">
+          <Link to="/">
+            <Button variant="outline" size="icon">
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+          </Link>
+          <h1 className="text-4xl font-bold text-primary">Health Tracking Features</h1>
+        </div>
+
+        <div className="flex justify-end mb-8">
           <Button onClick={shareWithCaregiver} className="flex items-center gap-2">
             <Share2 className="w-4 h-4" />
             Share with Caregiver
