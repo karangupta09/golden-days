@@ -32,9 +32,18 @@ const Payments = () => {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold text-center text-primary mb-8">
-            Complete Your Subscription
-          </h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-4xl font-bold text-primary">
+              Complete Your Subscription
+            </h1>
+            <Button
+              variant="outline"
+              onClick={() => navigate(-1)}
+              className="mb-4"
+            >
+              Back
+            </Button>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <Card
@@ -55,6 +64,7 @@ const Payments = () => {
                   <li>✓ Basic wellness tracking</li>
                   <li>✓ Community access</li>
                   <li>✓ Monthly newsletters</li>
+                  <li>✓ 24/7 Support access</li>
                 </ul>
               </CardContent>
             </Card>
