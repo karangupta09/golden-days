@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-      <div className="w-full bg-[#9b87f5] text-white py-3 text-center text-sm font-medium tracking-wide shadow-inner">
+      <div className="w-full bg-primary text-white py-3 text-center text-sm font-medium tracking-wide shadow-inner">
         © {new Date().getFullYear()} GoldenDays. All rights reserved.
       </div>
     </>
