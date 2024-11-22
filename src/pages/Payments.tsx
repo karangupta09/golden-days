@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import { Heart, Users, Shield } from "lucide-react";
+import { Heart, Users, Shield, ArrowLeft } from "lucide-react";
 
 const Payments = () => {
   const { toast } = useToast();
@@ -32,6 +32,15 @@ const Payments = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
+          <Button
+            variant="ghost"
+            className="mb-6"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Button>
+
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-primary mb-4">
               Join the GoldenDays Family
