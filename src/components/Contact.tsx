@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -98,13 +98,16 @@ const Contact = () => {
             </div>
 
             <div className="flex justify-center space-x-6">
-              <a href="https://facebook.com/goldendays" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">
+              <a href="https://facebook.com/goldendays" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary hover:text-primary/80">
+                <Facebook className="w-5 h-5" />
                 Facebook
               </a>
-              <a href="https://instagram.com/goldendays" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">
+              <a href="https://instagram.com/goldendays" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary hover:text-primary/80">
+                <Instagram className="w-5 h-5" />
                 Instagram
               </a>
-              <a href="https://twitter.com/goldendays" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">
+              <a href="https://twitter.com/goldendays" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary hover:text-primary/80">
+                <Twitter className="w-5 h-5" />
                 Twitter
               </a>
             </div>
