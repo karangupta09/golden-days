@@ -36,12 +36,6 @@ const Navigation = () => {
               Features
             </button>
             <button
-              onClick={() => scrollToSection("benefits")}
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Benefits
-            </button>
-            <button
               onClick={() => scrollToSection("pricing")}
               className="text-gray-600 hover:text-primary transition-colors"
             >

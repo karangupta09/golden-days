@@ -5,7 +5,6 @@ import Contact from "../components/Contact";
 import DownloadApp from "../components/DownloadApp";
 import Pricing from "../components/Pricing";
 import Navigation from "../components/Navigation";
-import Benefits from "../components/Benefits";
 
 const Index = () => {
   return (
@@ -14,7 +13,6 @@ const Index = () => {
       <div className="pt-16">
         <Hero />
         <Features />
-        <Benefits />
         <LearnMore />
         <Pricing />
         <DownloadApp />
