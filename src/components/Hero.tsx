@@ -77,10 +77,17 @@ const Hero = () => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[625px]">
               <DialogHeader>
-                <DialogTitle className="flex items-center gap-2 text-2xl">
-                  {feature.icon}
-                  {feature.title}
-                </DialogTitle>
+                <div className="flex items-center justify-between w-full mb-4">
+                  <div className="w-12 h-12 text-secondary">
+                    {feature.icon}
+                  </div>
+                  <DialogTitle className="flex-grow text-2xl text-center">
+                    {feature.title}
+                  </DialogTitle>
+                  <div className="w-12 h-12 invisible">
+                    {/* Invisible placeholder for alignment */}
+                  </div>
+                </div>
                 <DialogDescription className="text-base pt-4 leading-relaxed">
                   {feature.description}
                 </DialogDescription>
