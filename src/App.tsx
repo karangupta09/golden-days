@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import GetStarted from "./pages/GetStarted";
 import Payments from "./pages/Payments";
 import Schedule from "./pages/Schedule";
+import HealthTracking from "./pages/HealthTracking";
+import SocialConnection from "./pages/SocialConnection";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,8 @@ const App = () => (
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/health-tracking" element={<HealthTracking />} />
+          <Route path="/social-connection" element={<SocialConnection />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

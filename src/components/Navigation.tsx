@@ -27,14 +27,20 @@ const Navigation = () => {
               to="/schedule"
               className="text-gray-600 hover:text-primary transition-colors"
             >
-              Schedule
+              Sample Scheduling
             </Link>
-            <button
-              onClick={() => scrollToSection("learn-more")}
+            <Link
+              to="/health-tracking"
               className="text-gray-600 hover:text-primary transition-colors"
             >
-              About
-            </button>
+              Health Tracking
+            </Link>
+            <Link
+              to="/social-connection"
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Social Connection
+            </Link>
             <button
               onClick={() => scrollToSection("features")}
               className="text-gray-600 hover:text-primary transition-colors"
@@ -47,18 +53,11 @@ const Navigation = () => {
             >
               Pricing
             </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Contact
-            </button>
             <Link to="/get-started">
               <Button>Get Started</Button>
             </Link>
           </div>
 
-          {/* Mobile menu button */}
           <button className="md:hidden p-2 rounded-md text-gray-600 hover:text-primary hover:bg-gray-100">
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
