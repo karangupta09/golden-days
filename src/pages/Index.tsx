@@ -7,6 +7,7 @@ import Contact from "../components/Contact";
 import DownloadApp from "../components/DownloadApp";
 import Pricing from "../components/Pricing";
 import Navigation from "../components/Navigation";
+import Testimonials from "../components/Testimonials";
 
 const Index = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const Index = () => {
         <Features />
         <LearnMore />
         <Pricing />
+        <Testimonials />
         <DownloadApp />
         <Contact />
       </div>
