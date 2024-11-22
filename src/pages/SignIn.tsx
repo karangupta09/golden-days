@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { Mail, Lock } from "lucide-react";
+import { Mail, Lock, ArrowLeft } from "lucide-react";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,13 +23,24 @@ const SignIn = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <Button
+        variant="ghost"
+        onClick={() => navigate('/')}
+        className="absolute top-4 left-4 flex items-center gap-2 text-gray-600 hover:text-primary"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back to Home
+      </Button>
+
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
-          <img
-            src="/lovable-uploads/cd1b4251-9f89-4fc3-8dbb-f804c4b0ef51.png"
-            alt="GoldenDays Logo"
-            className="mx-auto h-16 w-16"
-          />
+          <Link to="/">
+            <img
+              src="/lovable-uploads/cd1b4251-9f89-4fc3-8dbb-f804c4b0ef51.png"
+              alt="GoldenDays Logo"
+              className="mx-auto h-16 w-16 cursor-pointer hover:scale-105 transition-transform"
+            />
+          </Link>
           <h2 className="mt-4 text-3xl font-bold text-primary">Welcome Back</h2>
         </div>
 
