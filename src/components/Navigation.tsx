@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Home, LogIn, Menu, X } from "lucide-react";
+import { Home, LogIn, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 const Navigation = () => {
@@ -86,49 +86,51 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Navigation */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-4">
-                {navigationLinks.map((link, index) => (
-                  link.path ? (
-                    <Link
-                      key={index}
-                      to={link.path}
-                      className="text-lg font-medium hover:text-primary transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-10 w-10">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-4 mt-8">
+                  {navigationLinks.map((link, index) => (
+                    link.path ? (
+                      <Link
+                        key={index}
+                        to={link.path}
+                        className="text-lg font-medium hover:text-primary transition-colors p-2"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <button
+                        key={index}
+                        onClick={link.action}
+                        className="text-lg font-medium hover:text-primary transition-colors text-left flex items-center gap-2 p-2"
+                      >
+                        {link.icon}
+                        {link.label}
+                      </button>
+                    )
+                  ))}
+                  <div className="flex flex-col gap-2 mt-4">
+                    <Link to="/signin" onClick={() => setIsOpen(false)}>
+                      <Button variant="outline" className="w-full flex items-center gap-2">
+                        <LogIn className="w-4 h-4" />
+                        Sign In
+                      </Button>
                     </Link>
-                  ) : (
-                    <button
-                      key={index}
-                      onClick={link.action}
-                      className="text-lg font-medium hover:text-primary transition-colors text-left flex items-center gap-2"
-                    >
-                      {link.icon}
-                      {link.label}
-                    </button>
-                  )
-                ))}
-                <div className="flex flex-col gap-2 mt-4">
-                  <Link to="/signin" onClick={() => setIsOpen(false)}>
-                    <Button variant="outline" className="w-full flex items-center gap-2">
-                      <LogIn className="w-4 h-4" />
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link to="/get-started" onClick={() => setIsOpen(false)}>
-                    <Button className="w-full">Sign Up</Button>
-                  </Link>
-                </div>
-              </nav>
-            </SheetContent>
-          </Sheet>
+                    <Link to="/get-started" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full">Sign Up</Button>
+                    </Link>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </nav>
