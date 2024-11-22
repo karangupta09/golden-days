@@ -23,24 +23,12 @@ const Navigation = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-6">
-            <Link
-              to="/schedule"
+            <button
+              onClick={() => scrollToSection("about")}
               className="text-gray-600 hover:text-primary transition-colors"
             >
-              Sample Scheduling
-            </Link>
-            <Link
-              to="/health-tracking"
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Health Tracking
-            </Link>
-            <Link
-              to="/social-connection"
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Social Connection
-            </Link>
+              About
+            </button>
             <button
               onClick={() => scrollToSection("features")}
               className="text-gray-600 hover:text-primary transition-colors"
@@ -52,6 +40,12 @@ const Navigation = () => {
               className="text-gray-600 hover:text-primary transition-colors"
             >
               Pricing
+            </button>
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Contact Us
             </button>
             <Link to="/get-started">
               <Button>Get Started</Button>
