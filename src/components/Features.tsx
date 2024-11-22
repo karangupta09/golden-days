@@ -1,11 +1,5 @@
 import { Calendar, Heart, Users, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const Features = () => {
   const features = [
@@ -38,26 +32,17 @@ const Features = () => {
   return (
     <section id="features" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <h2 className="text-4xl font-bold text-center mb-16 text-primary cursor-help">
-                Features Designed for You
-              </h2>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Click on the below squares to learn more about each feature</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <h2 className="text-4xl font-bold text-center mb-16 text-primary">
+          Features Designed for You
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <Link to={feature.link} key={index}>
               <div
-                className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 animate-fade-in-up"
+                className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 animate-fade-in-up group hover:-translate-y-1 hover:scale-105 transition-transform"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="mb-6">{feature.icon}</div>
+                <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-4 text-primary">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
               </div>

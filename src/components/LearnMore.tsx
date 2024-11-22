@@ -7,12 +7,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 const LearnMore = () => {
   const sections = [
@@ -51,28 +45,19 @@ const LearnMore = () => {
   return (
     <section id="learn-more" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <h2 className="text-4xl font-bold text-center mb-16 text-primary cursor-help">
-                Learn More About GoldenDays
-              </h2>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Click on the below squares to learn more about each feature</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <h2 className="text-4xl font-bold text-center mb-16 text-primary">
+          Learn More About GoldenDays
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sections.map((section, index) => (
             <Dialog key={index}>
               <DialogTrigger asChild>
                 <div
-                  className="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 animate-fade-in-up cursor-pointer"
+                  className="bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in-up cursor-pointer group hover:-translate-y-1 hover:scale-105"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="mb-6">{section.icon}</div>
-                  <h3 className="text-xl font-semibold mb-4 text-primary">{section.title}</h3>
+                  <div className="mb-6 transform group-hover:scale-110 transition-transform duration-300">{section.icon}</div>
+                  <h3 className="text-xl font-semibold mb-4 text-primary group-hover:text-secondary transition-colors">{section.title}</h3>
                   <p className="text-gray-600">{section.description}</p>
                 </div>
               </DialogTrigger>
