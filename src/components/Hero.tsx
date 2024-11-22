@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -20,17 +21,17 @@ const Hero = () => {
     {
       icon: <Sun className="w-8 h-8 mx-auto mb-2" />,
       title: "Personalized Care",
-      content: "GoldenDays transforms your wellness journey through intelligent personalization that adapts to your unique lifestyle. Our platform creates tailored schedules that integrate your health goals, activity preferences, and daily routines. Users experience a 73% improvement in maintaining daily wellness routines through customized activity recommendations, whether you're seeking cultural events, fitness classes, or creative workshops."
+      description: "GoldenDays transforms your wellness journey through intelligent personalization that adapts to your unique lifestyle. Our platform creates tailored schedules that integrate your health goals, activity preferences, and daily routines. Users experience a 73% improvement in maintaining daily wellness routines through customized activity recommendations, whether you're seeking cultural events, fitness classes, or creative workshops."
     },
     {
       icon: <Heart className="w-8 h-8 mx-auto mb-2" />,
       title: "Health Tracking",
-      content: "Take control of your well-being with our comprehensive health monitoring system. The platform helps you track vital health metrics, maintain medication schedules, and achieve wellness goals with user-friendly tools. Our integrated approach has helped users achieve a 50% reduction in missed medication doses and a 40% increase in preventive health measures. Family members and caregivers can stay informed through secure health updates, ensuring coordinated care and peace of mind."
+      description: "Take control of your well-being with our comprehensive health monitoring system. The platform helps you track vital health metrics, maintain medication schedules, and achieve wellness goals with user-friendly tools. Our integrated approach has helped users achieve a 50% reduction in missed medication doses and a 40% increase in preventive health measures. Family members and caregivers can stay informed through secure health updates, ensuring coordinated care and peace of mind."
     },
     {
       icon: <Users className="w-8 h-8 mx-auto mb-2" />,
       title: "Community Support",
-      content: "Connect with a vibrant community through GoldenDays' dynamic social features. Our platform matches you with local events and like-minded individuals who share your interests, from book clubs to cultural activities. Users report an 80% increase in meaningful social interactions and a 75% reduction in feelings of isolation. Whether you're interested in volunteering opportunities or cultural celebrations, GoldenDays helps you build lasting connections while staying mentally and physically active in your community."
+      description: "Connect with a vibrant community through GoldenDays' dynamic social features. Our platform matches you with local events and like-minded individuals who share your interests, from book clubs to cultural activities. Users report an 80% increase in meaningful social interactions and a 75% reduction in feelings of isolation. Whether you're interested in volunteering opportunities or cultural celebrations, GoldenDays helps you build lasting connections while staying mentally and physically active in your community."
     }
   ];
 
@@ -76,16 +77,14 @@ const Hero = () => {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[625px]">
               <DialogHeader>
-                <DialogTitle className="text-2xl font-bold text-primary flex items-center gap-2">
+                <DialogTitle className="flex items-center gap-2 text-2xl">
                   {feature.icon}
                   {feature.title}
                 </DialogTitle>
+                <DialogDescription className="text-base pt-4 leading-relaxed">
+                  {feature.description}
+                </DialogDescription>
               </DialogHeader>
-              <div className="mt-6">
-                <p className="text-gray-700 leading-relaxed">
-                  {feature.content}
-                </p>
-              </div>
             </DialogContent>
           </Dialog>
         ))}
