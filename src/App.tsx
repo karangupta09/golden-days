@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import GetStarted from "./pages/GetStarted";
 import Payments from "./pages/Payments";
+import Schedule from "./pages/Schedule";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/payments" element={<Payments />} />
+          <Route path="/schedule" element={<Schedule />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

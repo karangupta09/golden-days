@@ -23,6 +23,12 @@ const Navigation = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-6">
+            <Link
+              to="/schedule"
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              Schedule
+            </Link>
             <button
               onClick={() => scrollToSection("learn-more")}
               className="text-gray-600 hover:text-primary transition-colors"
