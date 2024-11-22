@@ -37,7 +37,7 @@ const Contact = () => {
               height="100%"
               style={{ border: 0 }}
               loading="lazy"
-              referrerPolicy="no-referrer-when-allowed"
+              referrerPolicy="no-referrer"
             ></iframe>
           </div>
         </div>
