@@ -32,6 +32,10 @@ const Pricing = () => {
                   <Check className="text-green-500" />
                   <span>Monthly newsletters</span>
                 </li>
+                <li className="flex items-center gap-2">
+                  <Check className="text-green-500" />
+                  <span>24/7 Support access</span>
+                </li>
               </ul>
               <Link to="/payments">
                 <Button className="w-full mt-8">Subscribe Now</Button>
