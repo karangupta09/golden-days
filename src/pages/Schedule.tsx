@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import DailySchedule from "@/components/schedule/DailySchedule";
+import WeeklySchedule from "@/components/schedule/WeeklySchedule";
 import TodoList from "@/components/schedule/TodoList";
 import { useState } from "react";
 
@@ -53,9 +54,7 @@ const Schedule = () => {
                 <DailySchedule selectedDate={date} />
               </TabsContent>
               <TabsContent value="weekly" className="mt-6">
-                <div className="text-center text-muted-foreground">
-                  Weekly view coming soon
-                </div>
+                <WeeklySchedule selectedDate={date} />
               </TabsContent>
             </Tabs>
           </div>
