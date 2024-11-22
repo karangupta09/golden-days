@@ -1,7 +1,8 @@
-import { Users, Book, Heart, Brain, MessageSquare } from "lucide-react";
+import { Users, Book, Heart, Brain, MessageSquare, ArrowLeft } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const SocialConnection = () => {
   const communityGroups = [
@@ -47,9 +48,16 @@ const SocialConnection = () => {
     <div className="min-h-screen bg-background">
       <Navigation />
       <main className="container mx-auto px-4 pt-20 pb-8">
-        <h1 className="text-4xl font-bold text-primary mb-8">
-          Community Connection
-        </h1>
+        <div className="flex items-center gap-4 mb-8">
+          <Link to="/">
+            <Button variant="outline" size="icon">
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+          </Link>
+          <h1 className="text-4xl font-bold text-primary">
+            Social Connection Features
+          </h1>
+        </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
           {communityGroups.map((group, index) => (
