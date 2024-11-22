@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 const Pricing = () => {
   return (
@@ -32,7 +33,9 @@ const Pricing = () => {
                   <span>Monthly newsletters</span>
                 </li>
               </ul>
-              <Button className="w-full mt-8">Get Started</Button>
+              <Link to="/payments">
+                <Button className="w-full mt-8">Subscribe Now</Button>
+              </Link>
             </CardContent>
           </Card>
 
@@ -64,7 +67,9 @@ const Pricing = () => {
                   <span>Personal wellness coach</span>
                 </li>
               </ul>
-              <Button className="w-full mt-8">Get Started</Button>
+              <Link to="/payments">
+                <Button className="w-full mt-8">Subscribe Now</Button>
+              </Link>
             </CardContent>
           </Card>
         </div>
