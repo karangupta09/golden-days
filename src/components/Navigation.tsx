@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Home } from "lucide-react";
+import { Home, LogIn } from "lucide-react";
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -66,9 +66,17 @@ const Navigation = () => {
             >
               Contact Us
             </button>
-            <Link to="/get-started">
-              <Button>Get Started</Button>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link to="/signin">
+                <Button variant="outline" className="flex items-center gap-2">
+                  <LogIn className="w-4 h-4" />
+                  Sign In
+                </Button>
+              </Link>
+              <Link to="/get-started">
+                <Button>Sign Up</Button>
+              </Link>
+            </div>
           </div>
 
           <button className="md:hidden p-2 rounded-md text-gray-600 hover:text-primary hover:bg-gray-100">

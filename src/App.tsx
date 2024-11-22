@@ -12,6 +12,7 @@ import Schedule from "./pages/Schedule";
 import HealthTracking from "./pages/HealthTracking";
 import SocialConnection from "./pages/SocialConnection";
 import CaregiverSupport from "./pages/CaregiverSupport";
+import SignIn from "./pages/SignIn";
 import Footer from "./components/Footer";
 
 // Scroll to top component
@@ -45,6 +46,7 @@ const App = () => (
               <Route path="/health-tracking" element={<HealthTracking />} />
               <Route path="/social-connection" element={<SocialConnection />} />
               <Route path="/caregiver-support" element={<CaregiverSupport />} />
+              <Route path="/signin" element={<SignIn />} />
             </Routes>
           </div>
           <Footer />
