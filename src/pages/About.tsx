@@ -1,8 +1,12 @@
 import Navigation from "../components/Navigation";
 import { useEffect } from "react";
-import { Star, Heart, Users, Brain, Shield, Palette, Trophy, BarChart } from "lucide-react";
+import { Star, Heart, Users, Brain, Shield, Palette, Trophy, BarChart, ArrowLeft, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const About = () => {
+  const navigate = useNavigate();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -11,6 +15,24 @@ const About = () => {
     <main className="min-h-screen">
       <Navigation />
       <div className="container mx-auto px-4 py-16 max-w-4xl">
+        <div className="flex items-center gap-4 mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="hover:bg-gray-100"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => navigate('/')}
+            className="hover:bg-gray-100"
+          >
+            <Home className="mr-2 h-4 w-4" />
+            Home
+          </Button>
+        </div>
         <div className="space-y-12">
           <section>
             <h1 className="text-4xl font-bold text-primary mb-6">About GoldenDays</h1>
