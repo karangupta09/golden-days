@@ -1,4 +1,5 @@
-import { useEffect, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Hero from "../components/Hero";
 import Features from "../components/Features";
 import LearnMore from "../components/LearnMore";
