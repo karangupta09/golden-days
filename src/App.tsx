@@ -2,7 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import GetStarted from "./pages/GetStarted";
@@ -13,14 +14,26 @@ import SocialConnection from "./pages/SocialConnection";
 import CaregiverSupport from "./pages/CaregiverSupport";
 import Footer from "./components/Footer";
 
+// Scroll to top component
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+    <TooltipProvider delayDuration={0}>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <div className="flex flex-col min-h-screen">
           <div className="flex-grow">
             <Routes>
