@@ -17,11 +17,18 @@ const Navigation = () => {
     }
   };
 
+  const goToHome = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm z-50 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" onClick={goToHome} className="flex items-center gap-2">
             <img
               src="/lovable-uploads/cd1b4251-9f89-4fc3-8dbb-f804c4b0ef51.png"
               alt="GoldenDays Logo"
@@ -32,10 +39,10 @@ const Navigation = () => {
 
           <div className="hidden md:flex items-center gap-6">
             {location.pathname === '/' && (
-              <Link to="/" className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
+              <button onClick={goToHome} className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
                 <Home className="w-4 h-4" />
                 Home
-              </Link>
+              </button>
             )}
             <Link to="/about" className="text-gray-600 hover:text-primary transition-colors">
               About
