@@ -1,5 +1,11 @@
 import { Calendar, Heart, Users, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Features = () => {
   const features = [
@@ -32,9 +38,18 @@ const Features = () => {
   return (
     <section id="features" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16 text-primary">
-          Features Designed for You
-        </h2>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <h2 className="text-4xl font-bold text-center mb-16 text-primary cursor-help">
+                Features Designed for You
+              </h2>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Click on the below squares to learn more about each feature</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <Link to={feature.link} key={index}>

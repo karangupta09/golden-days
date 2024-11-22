@@ -7,6 +7,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const LearnMore = () => {
   const sections = [
@@ -45,9 +51,18 @@ const LearnMore = () => {
   return (
     <section id="learn-more" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16 text-primary">
-          Learn More About GoldenDays
-        </h2>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <h2 className="text-4xl font-bold text-center mb-16 text-primary cursor-help">
+                Learn More About GoldenDays
+              </h2>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Click on the below squares to learn more about each feature</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sections.map((section, index) => (
             <Dialog key={index}>
