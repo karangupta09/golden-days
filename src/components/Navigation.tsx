@@ -38,12 +38,13 @@ const Navigation = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-6">
-            {location.pathname === '/' && (
-              <button onClick={goToHome} className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2">
-                <Home className="w-4 h-4" />
-                Home
-              </button>
-            )}
+            <button
+              onClick={goToHome}
+              className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
+            >
+              <Home className="w-4 h-4" />
+              Home
+            </button>
             <Link to="/about" className="text-gray-600 hover:text-primary transition-colors">
               About
             </Link>
