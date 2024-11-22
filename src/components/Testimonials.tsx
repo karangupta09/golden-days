@@ -1,5 +1,6 @@
 import { Card, CardContent } from "./ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Quote } from "lucide-react";
 
 const Testimonials = () => {
   const testimonials = [
@@ -41,29 +42,38 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-primary mb-4">What Our Users Say</h2>
-          <p className="text-gray-600 text-lg">
-            Join thousands of satisfied users who have transformed their daily lives with GoldenDays
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-primary mb-4">
+            Voices of Our Community
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Real stories from members who have found joy, connection, and purpose through GoldenDays
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-white">
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center text-center space-y-4">
-                  <Avatar className="w-20 h-20">
-                    <AvatarImage src={testimonial.image} alt={testimonial.name} />
-                    <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
-                  </Avatar>
-                  <p className="text-gray-600 italic">&ldquo;{testimonial.quote}&rdquo;</p>
-                  <div>
-                    <h4 className="font-semibold text-primary">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                    <p className="text-sm text-gray-400">{testimonial.location}</p>
+            <Card key={index} className="bg-white hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-8">
+                <div className="flex flex-col space-y-6">
+                  <div className="flex items-center space-x-4">
+                    <Avatar className="w-16 h-16 border-2 border-primary">
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                      <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-semibold text-lg text-primary">{testimonial.name}</h4>
+                      <p className="text-gray-600">{testimonial.role}</p>
+                      <p className="text-gray-500 text-sm">{testimonial.location}</p>
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <Quote className="absolute -top-2 -left-2 w-8 h-8 text-primary/20" />
+                    <p className="text-gray-700 italic pl-6 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -71,13 +81,19 @@ const Testimonials = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white rounded-lg p-8 shadow-sm">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <p className="text-4xl font-bold text-primary mb-2">{stat.percentage}</p>
-              <p className="text-sm text-gray-600">{stat.description}</p>
-            </div>
-          ))}
+        <div className="bg-primary rounded-2xl p-12 shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center p-6 bg-white/10 rounded-xl backdrop-blur-sm">
+                <p className="text-5xl font-bold text-white mb-3 animate-fade-in">
+                  {stat.percentage}
+                </p>
+                <p className="text-white/90 text-lg capitalize">
+                  {stat.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
