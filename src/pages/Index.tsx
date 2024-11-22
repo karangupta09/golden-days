@@ -3,15 +3,21 @@ import Features from "../components/Features";
 import LearnMore from "../components/LearnMore";
 import Contact from "../components/Contact";
 import DownloadApp from "../components/DownloadApp";
+import Pricing from "../components/Pricing";
+import Navigation from "../components/Navigation";
 
 const Index = () => {
   return (
     <main className="min-h-screen">
-      <Hero />
-      <Features />
-      <LearnMore />
-      <DownloadApp />
-      <Contact />
+      <Navigation />
+      <div className="pt-16">
+        <Hero />
+        <Features />
+        <LearnMore />
+        <Pricing />
+        <DownloadApp />
+        <Contact />
+      </div>
     </main>
   );
 };
