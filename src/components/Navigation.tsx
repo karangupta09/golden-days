@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Home, LogIn } from "lucide-react";
+import { Home, LogIn, Menu, X } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     if (location.pathname !== '/') {
@@ -15,6 +18,7 @@ const Navigation = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
+    setIsOpen(false);
   };
 
   const goToHome = () => {
@@ -22,7 +26,16 @@ const Navigation = () => {
       navigate('/');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsOpen(false);
   };
+
+  const navigationLinks = [
+    { label: "Home", action: goToHome, icon: <Home className="w-4 h-4" /> },
+    { label: "About", path: "/about" },
+    { label: "Features", action: () => scrollToSection("features") },
+    { label: "Pricing", action: () => scrollToSection("pricing") },
+    { label: "Contact Us", action: () => scrollToSection("contact") },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-sm z-50 shadow-sm">
@@ -37,35 +50,28 @@ const Navigation = () => {
             <span className="font-bold text-primary">GoldenDays</span>
           </Link>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <button
-              onClick={goToHome}
-              className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
-            >
-              <Home className="w-4 h-4" />
-              Home
-            </button>
-            <Link to="/about" className="text-gray-600 hover:text-primary transition-colors">
-              About
-            </Link>
-            <button
-              onClick={() => scrollToSection("features")}
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Features
-            </button>
-            <button
-              onClick={() => scrollToSection("pricing")}
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Pricing
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-gray-600 hover:text-primary transition-colors"
-            >
-              Contact Us
-            </button>
+            {navigationLinks.map((link, index) => (
+              link.path ? (
+                <Link 
+                  key={index}
+                  to={link.path} 
+                  className="text-gray-600 hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <button
+                  key={index}
+                  onClick={link.action}
+                  className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
+                >
+                  {link.icon}
+                  {link.label}
+                </button>
+              )
+            ))}
             <div className="flex items-center gap-2">
               <Link to="/signin">
                 <Button variant="outline" className="flex items-center gap-2">
@@ -79,11 +85,50 @@ const Navigation = () => {
             </div>
           </div>
 
-          <button className="md:hidden p-2 rounded-md text-gray-600 hover:text-primary hover:bg-gray-100">
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          {/* Mobile Navigation */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <nav className="flex flex-col gap-4">
+                {navigationLinks.map((link, index) => (
+                  link.path ? (
+                    <Link
+                      key={index}
+                      to={link.path}
+                      className="text-lg font-medium hover:text-primary transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <button
+                      key={index}
+                      onClick={link.action}
+                      className="text-lg font-medium hover:text-primary transition-colors text-left flex items-center gap-2"
+                    >
+                      {link.icon}
+                      {link.label}
+                    </button>
+                  )
+                ))}
+                <div className="flex flex-col gap-2 mt-4">
+                  <Link to="/signin" onClick={() => setIsOpen(false)}>
+                    <Button variant="outline" className="w-full flex items-center gap-2">
+                      <LogIn className="w-4 h-4" />
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to="/get-started" onClick={() => setIsOpen(false)}>
+                    <Button className="w-full">Sign Up</Button>
+                  </Link>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>
