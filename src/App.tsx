@@ -9,6 +9,7 @@ import Payments from "./pages/Payments";
 import Schedule from "./pages/Schedule";
 import HealthTracking from "./pages/HealthTracking";
 import SocialConnection from "./pages/SocialConnection";
+import CaregiverSupport from "./pages/CaregiverSupport";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/health-tracking" element={<HealthTracking />} />
           <Route path="/social-connection" element={<SocialConnection />} />
+          <Route path="/caregiver-support" element={<CaregiverSupport />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

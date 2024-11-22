@@ -25,7 +25,7 @@ const Features = () => {
       icon: <Bell className="w-12 h-12 text-secondary" />,
       title: "Caregiver Support",
       description: "Comprehensive tools for caregivers to provide the best possible care",
-      link: "/get-started"
+      link: "/caregiver-support"
     },
   ];
 
