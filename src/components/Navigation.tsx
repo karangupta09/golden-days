@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Home, LogIn, Menu } from "lucide-react";
+import { Home, LogIn, LogOut, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useToast } from "./ui/use-toast";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const session = useSession();
+  const supabase = useSupabaseClient();
+  const { toast } = useToast();
 
   const scrollToSection = (id: string) => {
     if (location.pathname !== '/') {
@@ -26,6 +31,24 @@ const Navigation = () => {
       navigate('/');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsOpen(false);
+  };
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Signed out successfully",
+        description: "You have been signed out of your account",
+      });
+      navigate('/');
+    }
     setIsOpen(false);
   };
 
@@ -73,15 +96,28 @@ const Navigation = () => {
               )
             ))}
             <div className="flex items-center gap-2">
-              <Link to="/signin">
-                <Button variant="outline" className="flex items-center gap-2">
-                  <LogIn className="w-4 h-4" />
-                  Sign In
+              {session ? (
+                <Button 
+                  variant="outline" 
+                  className="flex items-center gap-2"
+                  onClick={handleSignOut}
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign Out
                 </Button>
-              </Link>
-              <Link to="/get-started">
-                <Button>Sign Up</Button>
-              </Link>
+              ) : (
+                <>
+                  <Link to="/signin">
+                    <Button variant="outline" className="flex items-center gap-2">
+                      <LogIn className="w-4 h-4" />
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link to="/get-started">
+                    <Button>Sign Up</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 
@@ -117,15 +153,28 @@ const Navigation = () => {
                     )
                   ))}
                   <div className="flex flex-col gap-2 mt-4">
-                    <Link to="/signin" onClick={() => setIsOpen(false)}>
-                      <Button variant="outline" className="w-full flex items-center gap-2">
-                        <LogIn className="w-4 h-4" />
-                        Sign In
+                    {session ? (
+                      <Button 
+                        variant="outline" 
+                        className="w-full flex items-center gap-2"
+                        onClick={handleSignOut}
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sign Out
                       </Button>
-                    </Link>
-                    <Link to="/get-started" onClick={() => setIsOpen(false)}>
-                      <Button className="w-full">Sign Up</Button>
-                    </Link>
+                    ) : (
+                      <>
+                        <Link to="/signin" onClick={() => setIsOpen(false)}>
+                          <Button variant="outline" className="w-full flex items-center gap-2">
+                            <LogIn className="w-4 h-4" />
+                            Sign In
+                          </Button>
+                        </Link>
+                        <Link to="/get-started" onClick={() => setIsOpen(false)}>
+                          <Button className="w-full">Sign Up</Button>
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </nav>
               </SheetContent>

@@ -1,25 +1,22 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
-import { Mail, Lock, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { toast } = useToast();
+  const session = useSession();
+  const supabase = useSupabaseClient();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically handle the sign-in logic
-    toast({
-      title: "Sign in attempted",
-      description: "This is a demo. Sign-in functionality will be implemented later.",
-    });
-  };
+  useEffect(() => {
+    if (session) {
+      navigate('/');
+    }
+  }, [session, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -41,65 +38,23 @@ const SignIn = () => {
               className="mx-auto h-16 w-16 cursor-pointer hover:scale-105 transition-transform"
             />
           </Link>
-          <h2 className="mt-4 text-3xl font-bold text-primary">Welcome Back</h2>
+          <h2 className="mt-4 text-3xl font-bold text-primary">Welcome to GoldenDays</h2>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Sign in to GoldenDays</CardTitle>
+            <CardTitle>Sign in or Sign up</CardTitle>
             <CardDescription>
-              Enter your email and password to access your account
+              Create an account or sign in to access all features
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    className="pl-10"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    className="pl-10"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <Button type="submit" className="w-full">
-                Sign In
-              </Button>
-
-              <div className="text-center text-sm text-gray-600">
-                Don't have an account?{" "}
-                <Link to="/get-started" className="text-primary hover:underline">
-                  Sign up
-                </Link>
-              </div>
-            </form>
+            <Auth
+              supabaseClient={supabase}
+              appearance={{ theme: ThemeSupa }}
+              theme="light"
+              providers={[]}
+            />
           </CardContent>
         </Card>
       </div>
