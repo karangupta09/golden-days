@@ -7,9 +7,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/components/ui/use-toast";
 import { BasicInfoSection } from "@/components/profile/BasicInfoSection";
 import { UserTypeSection } from "@/components/profile/UserTypeSection";
-import { PreferencesSection } from "@/components/profile/PreferencesSection";
 import { ArrowLeft, ClipboardCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   fullName: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -17,17 +17,6 @@ const formSchema = z.object({
   password: z.string().min(8, { message: "Password must be at least 8 characters." }),
   confirmPassword: z.string(),
   userType: z.enum(["engager", "supporter"]),
-  goals: z.array(z.string()).optional(),
-  interests: z.array(z.string()).optional(),
-  healthTracking: z.boolean().optional(),
-  healthMetrics: z.array(z.string()).optional(),
-  emergencyContacts: z.array(z.object({
-    name: z.string(),
-    phone: z.string()
-  })).optional(),
-  consent: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the terms and conditions"
-  })
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -39,42 +28,47 @@ const GetStarted = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      goals: [],
-      interests: [],
-      healthMetrics: [],
-      healthTracking: false,
-      consent: false,
+      userType: "engager",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    toast({
-      title: "Profile Created!",
-      description: "Welcome to GoldenDays. Let's get started on your journey.",
-    });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: values.email,
+        password: values.password,
+        options: {
+          data: {
+            full_name: values.fullName,
+            user_type: values.userType,
+          },
+        },
+      });
+
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data) {
+        toast({
+          title: "Success!",
+          description: "Your account has been created. You can now sign in.",
+        });
+        navigate('/signin');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
-
-  const goals = [
-    "Stay physically active",
-    "Find volunteering opportunities",
-    "Discover social events",
-    "Manage caregiving tasks"
-  ];
-
-  const interests = [
-    "Fitness",
-    "Hobbies",
-    "Social groups",
-    "Book clubs"
-  ];
-
-  const healthMetrics = [
-    "Steps",
-    "Sleep",
-    "Hydration",
-    "Blood Pressure"
-  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12">
@@ -104,13 +98,6 @@ const GetStarted = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                   <BasicInfoSection form={form} />
                   <UserTypeSection form={form} />
-                  <PreferencesSection 
-                    form={form}
-                    goals={goals}
-                    interests={interests}
-                    healthMetrics={healthMetrics}
-                  />
-                  
                   <Button type="submit" className="w-full">
                     Create My Profile
                   </Button>
