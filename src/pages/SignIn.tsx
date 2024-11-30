@@ -78,15 +78,6 @@ const SignIn = () => {
               }}
               theme="light"
               providers={[]}
-              onError={(error) => {
-                toast({
-                  variant: "destructive",
-                  title: "Authentication Error",
-                  description: error.message === "Email not confirmed" 
-                    ? "Please check your email and confirm your account before signing in."
-                    : error.message,
-                });
-              }}
             />
           </CardContent>
         </Card>
