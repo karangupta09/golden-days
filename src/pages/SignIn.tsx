@@ -6,17 +6,35 @@ import { ArrowLeft } from "lucide-react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const SignIn = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (session) {
       navigate('/');
     }
-  }, [session, navigate]);
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        navigate('/');
+      }
+      if (event === 'USER_UPDATED') {
+        navigate('/');
+      }
+      if (event === 'SIGNED_OUT') {
+        navigate('/signin');
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [session, navigate, supabase.auth]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -51,9 +69,24 @@ const SignIn = () => {
           <CardContent>
             <Auth
               supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa }}
+              appearance={{ 
+                theme: ThemeSupa,
+                style: {
+                  button: { background: 'rgb(var(--primary))', color: 'white' },
+                  anchor: { color: 'rgb(var(--primary))' },
+                }
+              }}
               theme="light"
               providers={[]}
+              onError={(error) => {
+                toast({
+                  variant: "destructive",
+                  title: "Authentication Error",
+                  description: error.message === "Email not confirmed" 
+                    ? "Please check your email and confirm your account before signing in."
+                    : error.message,
+                });
+              }}
             />
           </CardContent>
         </Card>
