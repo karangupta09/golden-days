@@ -34,7 +34,7 @@ const GetStarted = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,
         options: {
@@ -54,13 +54,22 @@ const GetStarted = () => {
         return;
       }
 
-      if (data) {
-        toast({
-          title: "Success!",
-          description: "Your account has been created. You can now sign in.",
-        });
-        navigate('/signin');
-      }
+      // Sign out immediately after signup
+      await supabase.auth.signOut();
+
+      toast({
+        title: "Success!",
+        description: "Your account has been created. Please sign in to continue.",
+      });
+
+      // Navigate to signin page with credentials
+      navigate('/signin', { 
+        state: { 
+          email: values.email,
+          password: values.password
+        }
+      });
+
     } catch (error) {
       toast({
         title: "Error",
