@@ -19,11 +19,13 @@ const SignIn = () => {
       navigate('/');
     }
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
+      if (event === 'SIGNED_IN' && currentSession) {
         navigate('/');
       }
-      if (event === 'USER_UPDATED') {
+      if (event === 'USER_UPDATED' && currentSession) {
         navigate('/');
       }
       if (event === 'SIGNED_OUT') {
