@@ -2,7 +2,7 @@ import { Phone } from "lucide-react";
 
 const DownloadApp = () => {
   return (
-    <section className="bg-primary py-16">
+    <section className="bg-primary pt-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="text-white text-center md:text-left">

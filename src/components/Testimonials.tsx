@@ -4,7 +4,7 @@ import { testimonials, stats } from "./testimonials/TestimonialsData";
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+    <section className="bg-gradient-to-b from-white to-gray-50 pt-8">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold text-primary mb-4">
