@@ -6,7 +6,7 @@ const Testimonials = () => {
   return (
     <section className="bg-gradient-to-b from-white to-gray-50 pt-8">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-8 animate-fade-in">
           <h2 className="text-4xl font-bold text-primary mb-4">
             Voices of Our Community
           </h2>
@@ -15,7 +15,7 @@ const Testimonials = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard key={index} {...testimonial} />
           ))}
