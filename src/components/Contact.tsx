@@ -3,6 +3,8 @@ import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -10,8 +12,65 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you as soon as possible.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast({
+        variant: "destructive",
+        title: "Error sending message",
+        description: "Please try again later.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string,
+    field: string
+  ) => {
+    if (typeof e === 'string') {
+      setFormData(prev => ({ ...prev, [field]: e }));
+    } else {
+      const { name, value } = e.target;
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-gray-50/50">
       <div className="container mx-auto px-4">
@@ -23,26 +82,47 @@ const Contact = () => {
         </div>
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div className="space-y-6">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700">
                   Full Name
                 </label>
-                <Input id="name" placeholder="Your full name" className="w-full" />
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="Your full name"
+                  className="w-full"
+                  value={formData.name}
+                  onChange={e => handleChange(e, 'name')}
+                  required
+                />
               </div>
               
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
                   Email Address
                 </label>
-                <Input id="email" type="email" placeholder="your@email.com" className="w-full" />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="your@email.com"
+                  className="w-full"
+                  value={formData.email}
+                  onChange={e => handleChange(e, 'email')}
+                  required
+                />
               </div>
               
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium mb-2 text-gray-700">
                   Subject
                 </label>
-                <Select>
+                <Select
+                  value={formData.subject}
+                  onValueChange={(value) => handleChange(value, 'subject')}
+                  required
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a subject" />
                   </SelectTrigger>
@@ -60,13 +140,19 @@ const Contact = () => {
                   Message
                 </label>
                 <Textarea 
-                  id="message" 
-                  placeholder="Your message" 
-                  className="min-h-[150px] w-full" 
+                  id="message"
+                  name="message"
+                  placeholder="Your message"
+                  className="min-h-[150px] w-full"
+                  value={formData.message}
+                  onChange={e => handleChange(e, 'message')}
+                  required
                 />
               </div>
               
-              <Button type="submit" className="w-full text-lg py-6">Send Message</Button>
+              <Button type="submit" className="w-full text-lg py-6" disabled={isLoading}>
+                {isLoading ? "Sending..." : "Send Message"}
+              </Button>
             </form>
           </div>
 
